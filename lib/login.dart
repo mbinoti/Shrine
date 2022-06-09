@@ -33,30 +33,24 @@ class _LoginPageState extends State<LoginPage> {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
             const SizedBox(height: 80.0),
-            Column(
-              children: <Widget>[
-                Image.asset('assets/diamond.png'),
-                const SizedBox(height: 16.0),
-                const Text('SHRINE'),
-              ],
-            ),
+            Column(children: <Widget>[
+              Image.asset('assets/diamond.png'),
+              const SizedBox(height: 16.0),
+              Text('SHRINE', style: Theme.of(context).textTheme.headline5)
+            ]),
             const SizedBox(height: 120.0),
             TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                filled: true,
-                labelText: 'Username',
-              ),
-            ),
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                    //filled: true,
+                    labelText: 'Username')),
             const SizedBox(height: 12.0),
             TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                filled: true,
-                labelText: 'Password',
-              ),
-              obscureText: true,
-            ),
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                    //filled: true,
+                    labelText: 'Password'),
+                obscureText: true),
             OverflowBar(
               alignment: MainAxisAlignment.end,
               children: <Widget>[
@@ -66,12 +60,22 @@ class _LoginPageState extends State<LoginPage> {
                     _passwordController.clear();
                   },
                   child: const Text('CANCEL'),
+                  style: TextButton.styleFrom(
+                    primary: Theme.of(context).colorScheme.secondary,
+                    shape: const BeveledRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(7.0))),
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   child: const Text('NEXT'),
+                  style: ElevatedButton.styleFrom(
+                      elevation: 8.0,
+                      shape: const BeveledRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(7.0)))),
                 ),
               ],
             ),
