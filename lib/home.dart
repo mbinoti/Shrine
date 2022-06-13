@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -23,7 +21,9 @@ import 'model/products_repository.dart';
 import 'supplemental/asymmetric_view.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, this.category = Category.all}) : super(key: key);
+
+  final Category category;
 
   List<Card> _buildGridCards(BuildContext context) {
     List<Product> products = ProductsRepository.loadProducts(Category.all);
@@ -84,50 +84,51 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Return an AsymmetricView (104)
+    return AsymmetricView(products: ProductsRepository.loadProducts(category));
     // TODO: Pass Category variable to AsymmetricView (104)
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('SHRINE'),
-        leading: IconButton(
-          onPressed: () {
-            print('menu button');
-          },
-          icon: const Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              print('Search button');
-            },
-            icon: const Icon(
-              Icons.search,
-              semanticLabel: 'search',
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              print('Filter button');
-            },
-            icon: const Icon(
-              Icons.tune,
-              semanticLabel: 'filter',
-            ),
-          ),
-        ],
-      ),
-      body: AsymmetricView(
-        products: ProductsRepository.loadProducts(Category.all),
-      ),
-      // body: GridView.count(
-      //   crossAxisCount: 2,
-      //   padding: const EdgeInsets.all(16.0),
-      //   childAspectRatio: 8.0 / 9.0,
-      //   children: _buildGridCards(context),
-      // ),
-      resizeToAvoidBottomInset: false,
-    );
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: const Text('SHRINE'),
+    //     leading: IconButton(
+    //       onPressed: () {
+    //         print('menu button');
+    //       },
+    //       icon: const Icon(
+    //         Icons.menu,
+    //         semanticLabel: 'menu',
+    //       ),
+    //     ),
+    //     actions: <Widget>[
+    //       IconButton(
+    //         onPressed: () {
+    //           print('Search button');
+    //         },
+    //         icon: const Icon(
+    //           Icons.search,
+    //           semanticLabel: 'search',
+    //         ),
+    //       ),
+    //       IconButton(
+    //         onPressed: () {
+    //           print('Filter button');
+    //         },
+    //         icon: const Icon(
+    //           Icons.tune,
+    //           semanticLabel: 'filter',
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    //   body: AsymmetricView(
+    //     products: ProductsRepository.loadProducts(Category.all),
+    //   ),
+    //   // body: GridView.count(
+    //   //   crossAxisCount: 2,
+    //   //   padding: const EdgeInsets.all(16.0),
+    //   //   childAspectRatio: 8.0 / 9.0,
+    //   //   children: _buildGridCards(context),
+    //   // ),
+    //   resizeToAvoidBottomInset: false,
+    // );
   }
 }
